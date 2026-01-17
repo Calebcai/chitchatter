@@ -1,4 +1,5 @@
 import { ChangeEvent, useState, SyntheticEvent, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -24,6 +25,7 @@ export const PasswordPrompt = ({
   isOpen,
   onPasswordEntered,
 }: PasswordPromptProps) => {
+  const { t } = useTranslation()
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
@@ -53,28 +55,26 @@ export const PasswordPrompt = ({
     navigate(-1)
   }
 
-  const passwordToggleLabel = showPassword ? 'Hide password' : 'Show password'
+  const passwordToggleLabel = showPassword
+    ? t('room.hidePassword')
+    : t('room.showPassword')
 
   return (
     <Dialog open={isOpen}>
       <form onSubmit={handleFormSubmit}>
-        <DialogTitle>Room Password</DialogTitle>
+        <DialogTitle>{t('room.passwordTitle')}</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ mb: 2 }}>
-            You will only be able to connect to room peers that enter the same
-            password. Due to the decentralized nature of Chitchatter, it is
-            impossible to know if the password you enter will match the password
-            entered by other peers.
+            {t('room.passwordDesc')}
           </DialogContentText>
           <DialogContentText sx={{ mb: 2 }}>
-            If there is a mismatch, you will be in the room but be unable to
-            connect to others. An error will not be shown.
+            {t('room.passwordMismatch')}
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="password"
-            label="Password"
+            label={t('room.password')}
             type={showPassword ? 'text' : 'password'}
             fullWidth
             variant="outlined"
@@ -99,11 +99,11 @@ export const PasswordPrompt = ({
         <DialogActions>
           {!isEmbedded && (
             <Button color="secondary" onClick={handleGoBackClick}>
-              Go back
+              {t('room.goBack')}
             </Button>
           )}
           <Button type="submit" disabled={password.length === 0}>
-            Submit
+            {t('common.submit')}
           </Button>
         </DialogActions>
       </form>

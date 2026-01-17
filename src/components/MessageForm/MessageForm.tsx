@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import { useTranslation } from 'react-i18next'
 import FormControl from '@mui/material/FormControl'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -27,6 +28,7 @@ export const MessageForm = ({
   onMessageChange,
   isMessageSending,
 }: MessageFormProps) => {
+  const { t } = useTranslation()
   const settingsContext = useContext(SettingsContext)
   const { showActiveTypingStatus } = settingsContext.getUserSettings()
   const textFieldRef = useRef<HTMLInputElement>(null)
@@ -96,7 +98,7 @@ export const MessageForm = ({
             onChange={handleMessageChange}
             onKeyPress={handleMessageKeyPress}
             size="medium"
-            placeholder="Your message"
+            placeholder={t('room.yourMessage')}
             inputRef={textFieldRef}
             multiline
           />
@@ -107,7 +109,7 @@ export const MessageForm = ({
             // The !important is needed to override a Stack style
             marginTop: 'auto!important',
           }}
-          aria-label="Send"
+          aria-label={t('room.send')}
           type="submit"
           disabled={!canMessageBeSent()}
           color="primary"

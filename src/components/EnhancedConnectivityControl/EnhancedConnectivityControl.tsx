@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Paper from '@mui/material/Paper'
@@ -22,20 +23,20 @@ export const EnhancedConnectivityControl = ({
   elevation = 3,
   sx = { p: 2, mb: 2 },
 }: EnhancedConnectivityControlProps) => {
+  const { t } = useTranslation()
   return (
     <Paper elevation={elevation} sx={sx}>
       <FormGroup>
         <FormControlLabel
           control={<Switch checked={isEnabled} onChange={onChange} />}
-          label="Enhanced connectivity"
+          label={t('enhancedConnectivity.label')}
         />
       </FormGroup>
       <Typography
         variant={variant}
         color={showSecondaryColor ? 'text.secondary' : undefined}
       >
-        Use external TURN servers to improve connection reliability. Disable
-        this if you prefer not to connect to third-party servers.
+        {t('enhancedConnectivity.description')}
       </Typography>
     </Paper>
   )

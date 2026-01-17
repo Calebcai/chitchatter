@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react'
 import MuiMarkdown from 'mui-markdown'
 import Box from '@mui/material/Box'
 import useTheme from '@mui/material/styles/useTheme'
+import { useTranslation } from 'react-i18next'
 
 import { ShellContext } from 'contexts/ShellContext'
 import {
@@ -19,11 +20,12 @@ const messageCharacterSizeLimitFormatted = Intl.NumberFormat().format(
 
 export const About = () => {
   const { setTitle } = useContext(ShellContext)
+  const { t } = useTranslation()
   const theme = useTheme()
 
   useEffect(() => {
-    setTitle('About')
-  }, [setTitle])
+    setTitle(t('about.title'))
+  }, [setTitle, t])
 
   return (
     <Box
@@ -39,37 +41,39 @@ export const About = () => {
     >
       <MuiMarkdown>
         {`
-### User Guide
+### ${t('about.title')}
 
-Chitchatter is a communication tool designed to make secure and private communication accessible to all. Please [see the README](https://github.com/jeremyckahn/chitchatter/blob/develop/README.md) for full project documentation.
+${t('about.description')}
 
-#### Chat rooms
+#### ${t('about.chatRooms')}
 
-Public rooms can be joined by **anyone** with the room URL. By default, rooms are given a random and unguessable name. You can name your room whatever you'd like, but keep in mind that simpler room names are more guessable by others. For maximum security, consider using the default room name.
+${t('about.publicRooms')}
 
-Private rooms can only be joined by peers with a matching password. The password must be mutually agreed upon before joining. If peers submit mismatching passwords, they will be in the room but be unable to connect to each other. **No error will be shown** if there is a password mismatch because there is no central arbitrating mechanism by which to detect the mismatch.
+${t('about.privateRooms')}
 
-To connect to others, share the room URL with a secure tool such as [Burner Note](https://burnernote.com/) or [Yopass](https://yopass.se/). You will be notified when others join the room.
+${t('about.connectToOthers')}
 
-##### Peer verification
+##### ${t('about.peerVerification')}
 
-When you connect with a peer, Chitchatter automatically attempts to use [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography) to verify them. You can see everyone's public keys in the peer list. Feel free to share your public key with others (it is not sensitive information) so that they can uniquely identify you.
+${t('about.peerVerificationDesc')}
 
-All public and private keys are generated locally. Your private key is never sent to any peer or server.
+${t('about.localKeyGeneration')}
 
-##### Conversation backfilling
+##### ${t('about.conversationBackfilling')}
 
-Conversation transcripts are erased from local memory as soon as you close the page or navigate away from the room. Conversations are only ever held in volatile memory and never persisted to any disk by Chitchatter.
+${t('about.backfillingDesc')}
 
-When a peer joins a **public** room with participants already in it, the new peer will automatically request the transcript of the conversation that has already taken place from the other peers. Once all peers leave the room, the conversation is completely erased. Peers joining a **private** room will not get the conversation transcript backfilled.
+${t('about.publicRoomBackfill')}
 
-Chat transcript history is limited to ${messageTranscriptSizeLimitFormatted} messages for all rooms.
+${t('about.messageLimit', { limit: messageTranscriptSizeLimitFormatted })}
 
-#### Message Authoring
+#### ${t('about.messageAuthoring')}
 
-Chat messages support [GitHub-flavored Markdown](https://github.github.com/gfm/) with code syntax highlighting.
+${t('about.markdownSupport')}
 
-Press \`Enter\` to send a message. Press \`Shift + Enter\` to insert a line break. Message size is limited to ${messageCharacterSizeLimitFormatted} characters.
+${t('about.sendShortcuts', {
+  limit: messageCharacterSizeLimitFormatted,
+})}
         `}
       </MuiMarkdown>
     </Box>

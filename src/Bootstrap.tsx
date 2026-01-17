@@ -26,7 +26,6 @@ import { UserSettings } from 'models/settings'
 import { QueryParamKeys } from 'models/shell'
 import { PersistedStorageKeys } from 'models/storage'
 import { About } from 'pages/About'
-import { Disclaimer } from 'pages/Disclaimer'
 import { Home } from 'pages/Home'
 import { PrivateRoom } from 'pages/PrivateRoom'
 import { PublicRoom } from 'pages/PublicRoom'
@@ -258,7 +257,6 @@ const Bootstrap = ({
                     />
                   ))}
                   <Route path={routes.ABOUT} element={<About />} />
-                  <Route path={routes.DISCLAIMER} element={<Disclaimer />} />
                   <Route
                     path={routes.SETTINGS}
                     element={<Settings userId={userId} />}

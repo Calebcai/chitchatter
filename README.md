@@ -437,3 +437,5 @@ Chitchatter uses [StreamSaver.js](https://github.com/jimmywarting/StreamSaver.js
 ## ⚠️ [Disclaimer](https://chitchatter.im/disclaimer)
 
 By using Chitchatter, you agree to accept **full responsibility** for your actions related to its use. Additionally, you agree **not** to hold any contributors to the Chitchatter project responsible for any result of your use of it. The developers of Chitchatter do not endorse illegal activity.
+
+## 加入了汉语国际化支持

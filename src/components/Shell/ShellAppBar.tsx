@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { styled, useTheme } from '@mui/material/styles'
 
 import IconButton from '@mui/material/IconButton'
@@ -18,8 +20,6 @@ import Link from '@mui/icons-material/Link'
 import Menu from '@mui/icons-material/Menu'
 import QrCode2 from '@mui/icons-material/QrCode2'
 import RoomPreferences from '@mui/icons-material/RoomPreferences'
-
-import { useContext } from 'react'
 
 import { ShellContext } from 'contexts/ShellContext'
 
@@ -86,6 +86,7 @@ export const ShellAppBar = ({
   isFullscreen,
   setIsFullscreen,
 }: ShellAppBarProps) => {
+  const { t } = useTranslation()
   const theme = useTheme()
   const { peerList, isEmbedded, showRoomControls } = useContext(ShellContext)
   const handleQRCodeClick = () => setIsQRCodeDialogOpen(true)
@@ -136,21 +137,21 @@ export const ShellAppBar = ({
             )}
             {isEmbedded ? null : (
               <>
-                <Tooltip title="Copy current URL">
+                <Tooltip title={t('room.copyUrl')}>
                   <IconButton
                     size="large"
                     color="inherit"
-                    aria-label="Copy current URL"
+                    aria-label={t('room.copyUrl')}
                     onClick={onLinkButtonClick}
                   >
                     <Link />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Show QR Code">
+                <Tooltip title={t('room.showQRCode')}>
                   <IconButton
                     size="large"
                     color="inherit"
-                    aria-label="Show QR Code"
+                    aria-label={t('room.showQRCode')}
                     onClick={handleQRCodeClick}
                   >
                     <QrCode2 />
@@ -166,7 +167,9 @@ export const ShellAppBar = ({
             )}
             <Tooltip
               title={
-                showRoomControls ? 'Hide Room Controls' : 'Show Room Controls'
+                showRoomControls
+                  ? t('room.hideRoomControls')
+                  : t('room.showRoomControls')
               }
             >
               <IconButton
@@ -179,7 +182,11 @@ export const ShellAppBar = ({
               </IconButton>
             </Tooltip>
             <Tooltip
-              title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              title={
+                isFullscreen
+                  ? t('room.exitFullscreen')
+                  : t('room.enterFullscreen')
+              }
             >
               <IconButton
                 size="large"
@@ -191,12 +198,12 @@ export const ShellAppBar = ({
                 {isFullscreen ? <FullscreenExit /> : <Fullscreen />}
               </IconButton>
             </Tooltip>
-            <Tooltip title="Click to show peer list">
+            <Tooltip title={t('room.clickToShowPeerList')}>
               <IconButton
                 size="large"
                 edge="end"
                 color="inherit"
-                aria-label="Peer list"
+                aria-label={t('room.peerList')}
                 onClick={onPeerListClick}
                 sx={{
                   ml: 1,
@@ -213,10 +220,10 @@ export const ShellAppBar = ({
         in={!showAppBar}
         unmountOnExit
       >
-        <Tooltip title="Show room controls">
+        <Tooltip title={t('room.showRoomControls')}>
           <Fab
             size="small"
-            aria-label="show room controls"
+            aria-label={t('room.showRoomControls')}
             color="primary"
             onClick={onRoomControlsClick}
           >

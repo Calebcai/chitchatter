@@ -1,4 +1,5 @@
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
@@ -32,6 +33,7 @@ export const EmbedCodeDialog = ({
   handleEmbedCodeWindowClose,
   roomName,
 }: EmbedCodeDialogProps) => {
+  const { t } = useTranslation()
   const iframeSrc = new URL(`${packageHomepage}public/${roomName}`)
   iframeSrc.search = new URLSearchParams({ embed: '1' }).toString()
 
@@ -58,15 +60,15 @@ export const EmbedCodeDialog = ({
 
   return (
     <Dialog open={showEmbedCode} onClose={handleEmbedCodeWindowClose}>
-      <DialogTitle>Embedding Chitchatter</DialogTitle>
+      <DialogTitle>{t('embedCode.title')}</DialogTitle>
       <DialogContent>
         <DialogContentText
           sx={{
             mb: 2,
           }}
         >
-          Copy and paste this <code>iframe</code> HTML snippet into your
-          project:
+          {t('embedCode.description')}
+          <code>iframe</code> HTML snippet into your project:
         </DialogContentText>
         <CopyableBlock>
           <SyntaxHighlighter
@@ -95,28 +97,29 @@ export const EmbedCodeDialog = ({
             mb: 2,
           })}
         >
-          Advanced Embedding
+          {t('embedCode.advanced')}
         </Typography>
         <DialogContentText
           sx={{
             mb: 2,
           }}
         >
-          As an alternative to using an <code>iframe</code>, you can use the{' '}
+          {t('embedCode.advancedDescription')}
+          <code>iframe</code>, you can use the{' '}
           <Link
             href="https://github.com/jeremyckahn/chitchatter#SDK"
             target="_blank"
           >
-            Chitchatter SDK
+            {t('embedCode.chitchatterSdk')}
           </Link>{' '}
-          to embed a chat room as a{' '}
+          {t('embedCode.advancedDescription2')}
           <Link
             href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
             target="_blank"
           >
-            Web Component
+            {t('embedCode.webComponent')}
           </Link>{' '}
-          with additional configuration options:
+          {t('embedCode.advancedDescription3')}:
         </DialogContentText>
         <CopyableBlock>
           <SyntaxHighlighter
@@ -136,7 +139,9 @@ export const EmbedCodeDialog = ({
         </CopyableBlock>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleEmbedCodeWindowClose}>Close</Button>
+        <Button onClick={handleEmbedCodeWindowClose}>
+          {t('common.close')}
+        </Button>
       </DialogActions>
     </Dialog>
   )
