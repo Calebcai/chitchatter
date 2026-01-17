@@ -511,8 +511,8 @@ export function useRoom(
 
   const showVideoDisplay = Boolean(
     selfVideoStream ||
-      selfScreenStream ||
-      Object.values({ ...peerVideoStreams, ...peerScreenStreams }).length > 0
+    selfScreenStream ||
+    Object.values({ ...peerVideoStreams, ...peerScreenStreams }).length > 0
   )
 
   if (!showVideoDisplay && !isShowingMessages) setIsShowingMessages(true)
